@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.mask_info"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        //자바의 stream 필터를 워닝없이 사용하기 위해.
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //안드로이드와 무관한 테스트에 사용.
+    testImplementation 'junit:junit:4.+'
+
+    //안드로이드만을 위한 테스트 코드에 사용. 주로 UI관련
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //레트로핏. 최신 버전으로
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //모시. 레트로핏과 버전을 맞춰주면 됨.
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    //자바의 stream 필터를 워닝없이 사용하기 위해.
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
+
+    def lifecycle_version="2.4.0"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // ViewModel utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    // 위치 정보를 얻기위한 구글플레이서비스 추가.
+    implementation "com.google.android.gms:play-services-location:20.0.0"
+
+    // tedpermission이라는 권한 관련 라이브러리임.
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
+
+}
